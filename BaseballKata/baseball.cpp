@@ -12,8 +12,13 @@ public:
 		{
 			throw length_error("Length Error! Query Length should be 3");
 		}
+		for (char ch : query)
+		{
+			if (isdigit(ch) == 0)
+				throw invalid_argument("Query should be consist of number");
+		}
 
-		string result;
+		string result = "";
 		return result;
 	}
 };
