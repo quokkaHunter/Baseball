@@ -3,15 +3,33 @@
 
 using namespace std;
 
+struct GuessResults
+{
+	bool solved;
+	int strikes;
+	int balls;
+};
+
 class Baseball
 {
 public:
-	string guess(string query)
+	Baseball(string answer) { this->answer = answer; }
+	GuessResults& guess(string query)
 	{
 		assertIllegalArgument(query);
 
-		string result = "";
-		return result;
+		GuessResults guessResults = {};
+
+		for (int i = 0; i < 3; i++)
+		{
+			if (query[i] == answer[i])
+				guessResults.strikes++;
+		}
+
+		if (guessResults.strikes == 3)
+			guessResults.solved = true;
+
+		return guessResults;
 	}
 	void assertIllegalArgument(std::string& query)
 	{
@@ -30,6 +48,10 @@ public:
 	bool isOverlappedNumber(std::string& query)
 	{
 		return query[0] == query[1] || query[1] == query[2] || query[0] == query[2];
+	}
+	void setAnswer(string answer)
+	{
+		this->answer = answer;
 	}
 private:
 	string answer;
